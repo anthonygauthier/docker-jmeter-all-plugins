@@ -11,11 +11,12 @@ CMDRUNNER_VERSION
 ```
 
 Current versions :
-| Component | Version |
-|-----------|---------|
-|JMeter|4.0|
-|JMeter PluginsManager|0.19|
-|CMDRunner|2.0|
+
+| Component |      Version     |
+|-----------|:----------------:|
+|  JMeter   |       4.0        |
+|JMeter PluginsManager |  0.19 |
+|CMDRunner  |       2.0        |
 
 ## Contributing
 For any issues, suggestions simply create an issue on this repository. To contribute, fork away and make a pull request! :-)
