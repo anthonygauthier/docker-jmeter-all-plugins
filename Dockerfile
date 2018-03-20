@@ -21,5 +21,8 @@ RUN mv ./cmdrunner-2.0.jar ${JMETER_HOME}/lib
 RUN java -cp ${JMETER_HOME}/lib/ext/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar org.jmeterplugins.repository.PluginManagerCMDInstaller
 RUN ${JMETER_HOME}/bin/PluginsManagerCMD.sh install-all-except 
 
+# Install Git
+RUN apt-get update && apt-get install -y git
+
 ENV JMETER_HOME ${JMETER_HOME}
 ENV PATH ${JMETER_HOME}/bin:$PATH
