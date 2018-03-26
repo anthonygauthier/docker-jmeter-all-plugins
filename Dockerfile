@@ -11,6 +11,10 @@ RUN tar -xvzf apache-jmeter-${JMETER_VERSION}.tgz
 RUN rm apache-jmeter-${JMETER_VERSION}.tgz
 RUN mv apache-jmeter-${JMETER_VERSION} ${JMETER_HOME}
 
+# Uncomment some JVM Options
+RUN sed -i '/RUN_IN_DOCKER/s/^#//g' /opt/jmeter/bin/jmeter
+RUN sed -i '/VERBOSE_GC="-Xlog:gc/s/^#//g' /opt/jmeter/bin/jmeter
+
 # Get plugins
 RUN wget http://central.maven.org/maven2/kg/apc/jmeter-plugins-manager/${JMETER_PMANAGER_VERSION}/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar
 RUN mv ./jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar ${JMETER_HOME}/lib/ext
