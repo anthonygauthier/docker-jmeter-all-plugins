@@ -6,24 +6,22 @@ ARG CMDRUNNER_VERSION="2.0"
 ARG JMETER_HOME="/opt/jmeter"
 ARG JMETER_PLUGINS_PATH="/opt/jmeter/lib/ext"
 
-RUN wget http://apache.mirror.gtcomm.net//jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
-RUN tar -xvzf apache-jmeter-${JMETER_VERSION}.tgz
-RUN rm apache-jmeter-${JMETER_VERSION}.tgz
-RUN mv apache-jmeter-${JMETER_VERSION} ${JMETER_HOME}
+RUN wget http://apache.mirror.gtcomm.net//jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz \
+  && tar -xvzf apache-jmeter-${JMETER_VERSION}.tgz \
+  && rm apache-jmeter-${JMETER_VERSION}.tgz \
+  && mv apache-jmeter-${JMETER_VERSION} ${JMETER_HOME}
 
 # Uncomment some JVM Options
-RUN sed -i '/RUN_IN_DOCKER/s/^#//g' /opt/jmeter/bin/jmeter
-RUN sed -i '/VERBOSE_GC="-Xlog:gc/s/^#//g' /opt/jmeter/bin/jmeter
+RUN sed -i '/RUN_IN_DOCKER/s/^#//g' /opt/jmeter/bin/jmeter \
+  && sed -i '/VERBOSE_GC="-Xlog:gc/s/^#//g' /opt/jmeter/bin/jmeter
 
-# Get plugins
-RUN wget http://central.maven.org/maven2/kg/apc/jmeter-plugins-manager/${JMETER_PMANAGER_VERSION}/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar
-RUN mv ./jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar ${JMETER_HOME}/lib/ext
-
-RUN wget http://repo1.maven.org/maven2/kg/apc/cmdrunner/${CMDRUNNER_VERSION}/cmdrunner-${CMDRUNNER_VERSION}.jar
-RUN mv ./cmdrunner-2.0.jar ${JMETER_HOME}/lib
-
-RUN java -cp ${JMETER_HOME}/lib/ext/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar org.jmeterplugins.repository.PluginManagerCMDInstaller
-RUN ${JMETER_HOME}/bin/PluginsManagerCMD.sh install-all-except 
+# Install plugins
+RUN wget http://central.maven.org/maven2/kg/apc/jmeter-plugins-manager/${JMETER_PMANAGER_VERSION}/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar \
+  && mv ./jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar ${JMETER_HOME}/lib/ext \
+  && wget http://repo1.maven.org/maven2/kg/apc/cmdrunner/${CMDRUNNER_VERSION}/cmdrunner-${CMDRUNNER_VERSION}.jar \
+  && mv ./cmdrunner-2.0.jar ${JMETER_HOME}/lib \
+  && java -cp ${JMETER_HOME}/lib/ext/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar org.jmeterplugins.repository.PluginManagerCMDInstaller \
+  && ${JMETER_HOME}/bin/PluginsManagerCMD.sh install-all-except 
 
 # Install Git
 RUN apt-get update && apt-get install -y git
