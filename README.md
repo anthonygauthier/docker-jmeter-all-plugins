@@ -15,8 +15,8 @@ Current versions :
 | Component |      Version     |
 |-----------|:----------------:|
 |  JMeter   |       4.0        |
-|JMeter PluginsManager |  0.20 |
-|CMDRunner  |       2.0        |
+|JMeter PluginsManager |  1.2 |
+|CMDRunner  |       2.2        |
 
 ## Contributing
 For any issues, suggestions simply create an issue on this repository. To contribute, fork away and make a pull request! :-)
