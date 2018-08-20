@@ -19,7 +19,7 @@ RUN sed -i '/RUN_IN_DOCKER/s/^#//g' /opt/jmeter/bin/jmeter \
 RUN wget http://central.maven.org/maven2/kg/apc/jmeter-plugins-manager/${JMETER_PMANAGER_VERSION}/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar \
   && mv ./jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar ${JMETER_HOME}/lib/ext \
   && wget http://repo1.maven.org/maven2/kg/apc/cmdrunner/${CMDRUNNER_VERSION}/cmdrunner-${CMDRUNNER_VERSION}.jar \
-  && mv ./cmdrunner-2.0.jar ${JMETER_HOME}/lib \
+  && mv ./cmdrunner-${CMDRUNNER_VERSION}.jar ${JMETER_HOME}/lib \
   && java -cp ${JMETER_HOME}/lib/ext/jmeter-plugins-manager-${JMETER_PMANAGER_VERSION}.jar org.jmeterplugins.repository.PluginManagerCMDInstaller \
   && ${JMETER_HOME}/bin/PluginsManagerCMD.sh install-all-except 
 
